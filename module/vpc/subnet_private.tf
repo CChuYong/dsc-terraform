@@ -1,9 +1,10 @@
 resource "aws_subnet" "private" {
   count = local.private_subnet_size
-  cidr_block = cidrsubnet(local.private_subnet_cidr_prefix, 2, count.index)
+  cidr_block = cidrsubnet(local.private_subnet_cidr_prefix, 4, count.index)
 
   vpc_id = aws_vpc.vpc.id
   availability_zone = element(data.aws_availability_zones.available.names, count.index % local.az_count)
+  # if) az_count = 2 이고, az별 subnet 수가 2이면 1a, 1b, 1a, 1b
 
   tags = {
     Name = "${local.vpc_name}-subnet-private-${count.index + 1}"
@@ -14,7 +15,7 @@ resource "aws_subnet" "private" {
 resource "aws_route_table_association" "private" {
   count = local.private_subnet_size
 
-  route_table_id = aws_route_table.private.id
+  route_table_id = aws_route_table.private[count.index % local.az_count].id
   subnet_id = aws_subnet.private[count.index].id
 }
 

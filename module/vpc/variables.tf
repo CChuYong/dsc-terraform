@@ -51,6 +51,7 @@ locals {
 
   az_count = var.zone_size
   nat_per_az = var.nat_per_az
+  nat_size = var.nat_per_az ? var.zone_size : 1
 
   public_subnet_per_az_size = var.public_subnet_per_az_size
   private_subnet_per_az_size = var.private_subnet_per_az_size
@@ -58,6 +59,6 @@ locals {
   public_subnet_size = var.zone_size * var.public_subnet_per_az_size
   private_subnet_size = var.zone_size * var.private_subnet_per_az_size
 
-  private_subnet_cidr_prefix = "${var.cidr_prefix}.0.0/20" #12개 -> 2^12 = 4096개
-  public_subnet_cidr_prefix = "${var.cidr_prefix}.16.0/20" #12개 -> 4096개
+  private_subnet_cidr_prefix = "${var.cidr_prefix}.0.0/18" #12개 -> 2^12 = 4096개
+  public_subnet_cidr_prefix = "${var.cidr_prefix}.64.0/18" #12개 -> 4096개
 }
