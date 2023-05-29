@@ -17,3 +17,10 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
   subnet_id = aws_subnet.public[count.index].id
 }
+
+resource "aws_network_acl_association" "public" {
+  count = local.public_subnet_size
+
+  network_acl_id = aws_network_acl.public.id
+  subnet_id = aws_subnet.public[count.index].id
+}

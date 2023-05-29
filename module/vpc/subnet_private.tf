@@ -18,3 +18,9 @@ resource "aws_route_table_association" "private" {
   subnet_id = aws_subnet.private[count.index].id
 }
 
+resource "aws_network_acl_association" "private" {
+  count = local.private_subnet_size
+
+  network_acl_id = aws_network_acl.private.id
+  subnet_id = aws_subnet.private[count.index].id
+}
