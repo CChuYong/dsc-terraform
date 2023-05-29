@@ -13,3 +13,13 @@ output "vpc_id" {
   value = aws_vpc.vpc.id
   description = "VPC의 ID"
 }
+
+output "public_subnet_ids" {
+    value = aws_subnet.public.*.id
+    description = "VPC의 Public 서브넷 ID 목록"
+}
+
+output "private_subnet_ids" {
+  value = aws_subnet.private.*.id
+  description = "VPC의 Private 서브넷 ID 목록"
+}
