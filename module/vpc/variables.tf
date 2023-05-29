@@ -48,11 +48,15 @@ variable "nat_per_az" {
 locals {
   vpc_name = var.name
   vpc_cidr = "${var.cidr_prefix}.0.0/16"
+
   az_count = var.zone_size
   nat_per_az = var.nat_per_az
 
   public_subnet_per_az_size = var.public_subnet_per_az_size
   private_subnet_per_az_size = var.private_subnet_per_az_size
+
+  public_subnet_size = var.zone_size * var.public_subnet_per_az_size
+  private_subnet_size = var.zone_size * var.private_subnet_per_az_size
 
   private_subnet_cidr_prefix = "${var.cidr_prefix}.0.0/20" #12개 -> 2^12 = 4096개
   public_subnet_cidr_prefix = "${var.cidr_prefix}.16.0/20" #12개 -> 4096개

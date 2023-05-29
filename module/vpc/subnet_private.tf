@@ -1,5 +1,5 @@
 resource "aws_subnet" "private" {
-  count = local.az_count * local.private_subnet_per_az_size
+  count = local.private_subnet_size
   cidr_block = cidrsubnet(local.private_subnet_cidr_prefix, 2, count.index)
 
   vpc_id = aws_vpc.vpc.id
@@ -10,3 +10,11 @@ resource "aws_subnet" "private" {
     VpcName = local.vpc_name
   }
 }
+
+resource "aws_route_table_association" "private" {
+  count = local.private_subnet_size
+
+  route_table_id = aws_route_table.private.id
+  subnet_id = aws_subnet.private[count.index].id
+}
+
