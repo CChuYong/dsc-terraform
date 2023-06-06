@@ -1,7 +1,7 @@
- module "eks" {
-  source = "terraform-aws-modules/eks/aws"
+module "eks" {
+  source     = "terraform-aws-modules/eks/aws"
 
-  cluster_name                    = "prod-eks-cluster"
+  cluster_name                    = "prod-dsc-cluster"
   cluster_version                 = "1.27"
   cluster_endpoint_private_access = false
   cluster_endpoint_public_access  = true
@@ -25,7 +25,7 @@
 
   fargate_profiles = {
     default = {
-      name = "default"
+      name      = "default"
       selectors = [
         {
           namespace = "kube-system"
