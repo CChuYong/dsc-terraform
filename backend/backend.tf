@@ -11,7 +11,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "tf-state" {
-  bucket = "bsc-tf-state"
+  bucket = "bsc-tf-state-2"
 }
 
 resource "aws_s3_bucket_versioning" "tf-versioning" {

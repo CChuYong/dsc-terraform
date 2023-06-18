@@ -5,7 +5,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "bsc-tf-state"
+    bucket         = "bsc-tf-state-2"
     key            = "terraform/dsc2/terraform.tfstate"
     region         = "ap-northeast-2"
     encrypt        = true
