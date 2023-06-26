@@ -3,6 +3,11 @@ variable "name" {
   description = "VPC 이름"
 }
 
+variable "eks" {
+  type = bool
+  description = "EKS 여부"
+}
+
 variable "zone_size" {
   type = number
   description = "Availability Zone 크기"
@@ -61,4 +66,5 @@ locals {
 
   private_subnet_cidr_prefix = "${var.cidr_prefix}.0.0/18" #12개 -> 2^12 = 4096개
   public_subnet_cidr_prefix = "${var.cidr_prefix}.64.0/18" #12개 -> 4096개
+  is_eks = var.eks
 }

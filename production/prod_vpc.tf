@@ -8,4 +8,6 @@ module "dsc_prod_vpc" {
   public_subnet_per_az_size = 1
   private_subnet_per_az_size = 1
   nat_per_az = false
+
+  eks = true
 }

@@ -9,6 +9,7 @@ resource "aws_subnet" "private" {
   tags = {
     Name = "${local.vpc_name}-subnet-private-${count.index + 1}"
     VpcName = local.vpc_name
+    "kubernetes.io/role/internal-elb" = local.is_eks ? "1" : null
   }
 }
 
