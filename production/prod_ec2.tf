@@ -5,6 +5,10 @@ resource "aws_instance" "vpn_bastion" {
   associate_public_ip_address = true
   security_groups = [aws_security_group.allow_ssh.id]
 
+  lifecycle {
+    ignore_changes = [security_groups]
+  }
+
   tags = {
     Name = "bastion-host"
   }
